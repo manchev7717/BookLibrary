@@ -43,7 +43,7 @@ test('Login with valid credentials', async ({ page }) => {
   await page.fill('input[name="password"]', '123456');
 
   await page.click('input[type="submit"]');
-
+  await page.waitForURL('http://localhost:3000/catalog')
   await page.$('a[href="/catalog"]');
   expect(page.url()).toBe('http://localhost:3000/catalog');
 });
@@ -169,7 +169,7 @@ test('Verify visibility of Logout button after user login', async ({ page }) => 
   await page.click('input[type="submit"]');
 
   const logoutLink = await page.$('a[href="javascript:void(0)"]');
-
+  await page.waitForURL('http://localhost:3000/catalog');
   const isLogoutLinkVisible = await logoutLink.isVisible();
 
   expect(isLogoutLinkVisible).toBe(true);
